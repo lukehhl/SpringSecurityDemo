@@ -44,7 +44,7 @@ public class User implements Serializable, UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             //这里添加的角色必须带有"ROLE_"，SpringSecurity才能正确识别角色
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return authorities;
     }
@@ -109,5 +109,17 @@ public class User implements Serializable, UserDetails {
 
     public void setLocked(Boolean locked) {
         this.locked = locked;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", locked=" + locked +
+                ", roles=" + roles +
+                '}';
     }
 }
